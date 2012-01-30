@@ -20,8 +20,9 @@ use XML::LibXML::PrettyPrint;
 
 BEGIN
 {
-	my @empty  = qw[base basefont bgsound br canvas col command embed frame hr
-	                img is index keygen link meta param];
+	my @noshow = qw[base basefont bgsound meta param script style];
+	my @empty  = qw[br canvas col command embed frame hr
+	                img is index keygen link];
 	my @inline = qw[a abbr area b bdi bdo big button cite code dfn em font i
 	                input kbd label mark meter nobr progress q rp rt ruby s
 	                samp small span strike strong sub sup time tt u var wbr];
@@ -30,7 +31,7 @@ BEGIN
 	                fieldset figcaption figure footer form frameset h1 h2 h3
 	                h4 h5 h6 head header hgroup html iframe ins legend li
 	                listing map marquee menu nav noembed noframes noscript
-	                object ol optgroup option p select section source summary
+	                object ol optgroup option p pre select section source summary
 	                table tbody td tfoot th thead title tr track ul video];
 	
 	{
@@ -41,6 +42,8 @@ BEGIN
 			foreach @block;
 		*{ uc $_ } = sub { (shift)->_empty($_, @_) }
 			foreach @empty;
+		*{ uc $_ } = sub { (shift)->_noshow($_, @_) }
+			foreach @noshow;
 	}
 }
 
@@ -95,7 +98,7 @@ sub _block
 {
 	my ($self, $func, $node, %args) = @_;
 	
-	my $return = '';
+	my $return = "\n";
 	foreach my $kid ($node->childNodes)
 	{
 		if ($kid->nodeName eq '#text')
@@ -107,16 +110,30 @@ sub _block
 			my $elem = uc $kid->nodeName;
 			my $str  = $self->$elem($kid, %args);
 			
-			$return = "\n" if ($str !~ /^\n/ and $return eq '');
+			if ($str =~ m{^\n} and not $kid->previousSibling)
+			{
+				$str =~ s{^\n}{};
+			}
+
+			if ($str =~ m{\n$} and not $kid->nextSibling)
+			{
+				$str =~ s{\n$}{};
+			}
+
 			$return .= $str;
 		}
 	}
-	$return .= "\n" unless $return =~ /\n$/;
+	$return .= "\n";
 	
 	$return;
 }
 
 sub _empty
+{
+	return '';
+}
+
+sub _noshow
 {
 	return '';
 }
