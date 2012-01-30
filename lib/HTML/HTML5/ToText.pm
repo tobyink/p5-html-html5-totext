@@ -282,6 +282,9 @@ Or maybe we want to force C<< <big> >> elements into uppercase?
    -> with_traits(qw/+Local::Embiggen/)
    -> process_string($html);
 
+Share your examples of extending HTML::HTML5::ToText at
+L<https://bitbucket.org/tobyink/p5-html-html5-totext/wiki/Extending>.
+
 =head1 BUGS
 
 Please report any bugs to
