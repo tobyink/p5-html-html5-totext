@@ -60,8 +60,8 @@ rendering, or whether to use the default table rendering.
    ->with_traits(qw/RenderTables/)
    ->new(should_render_table => sub
      {
-       my ($self, $table_node) = @_;
-       if ($table_node->getAttribute('table') =~ /layout/)
+       my ($self, $element) = @_;
+       if ($element->getAttribute('class') =~ /layout/i)
        {
          return 1;  # true - fancy rendering
        }
