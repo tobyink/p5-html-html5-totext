@@ -64,7 +64,9 @@ sub process
 	XML::LibXML::PrettyPrint->new_for_html->strip_whitespace($node);
 	
 	my $elem = uc $node->nodeName;
-	return $self->$elem($node);
+	my $str  = $self->$elem($node);
+	$str =~ s{ (^\n+) | (\n+$) }{}gx;
+	"$str\n";
 }
 
 sub textnode
