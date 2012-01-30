@@ -143,7 +143,7 @@ sub to_text
 	if ($self->caption)
 	{
 		local $Text::Wrap::columns = $total_width;
-		my $caption_text = $tt->process($self->caption);
+		my $caption_text = $tt->process($self->caption, 'no_clone');
 		$caption_text =~ s{(\r?\n)+$}{};
 		$return = join "\n", ("=" x $total_width), wrap('','',"TABLE: $caption_text"), $return;
 	}
@@ -160,4 +160,68 @@ sub to_text
 	$return
 }
 
-1;
+__PACKAGE__
+__END__
+
+=head1 NAME
+
+HTML::HTML5::Table - representation of an HTML table
+
+=head1 DESCRIPTION
+
+This is not yet fully documented, but the source code should be *gulp*
+fairly self-documenting. Just skim the Moose attributes of this module
+and the other modules in the "HTML::HTML5::Table" namespace and hopefully
+you'll get an idea of how they all hang together. But briefly:
+
+=over
+
+=item * C<HTML::HTML5::Table> - the HTML C<< <table> >> element
+
+=item * C<HTML::HTML5::Table::Body> - the HTML C<< <tbody> >> element
+
+=item * C<HTML::HTML5::Table::Cell> - the HTML C<< <td> >> element
+
+=item * C<HTML::HTML5::Table::Col> - the HTML C<< <col> >> element
+
+=item * C<HTML::HTML5::Table::ColGroup> - the HTML C<< <colgroup> >> element
+
+=item * C<HTML::HTML5::Table::Foot> - the HTML C<< <tfoot> >> element
+
+=item * C<HTML::HTML5::Table::Head> - the HTML C<< <thead> >> element
+
+=item * C<HTML::HTML5::Table::HeadCell> - the HTML C<< <th> >> element
+
+=item * C<HTML::HTML5::Table::Row> - the HTML C<< <tr> >> element
+
+=item * C<HTML::HTML5::Table::Section> - superclass for C<< <thead> >>, C<< <tfoot> >> and C<< <tbody> >>
+
+=back
+
+=head1 BUGS
+
+Please report any bugs to
+L<http://rt.cpan.org/Dist/Display.html?Queue=HTML-HTML5-ToText>.
+
+=head1 SEE ALSO
+
+L<HTML::HTML5::ToText>.
+
+=head1 AUTHOR
+
+Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
+
+=head1 COPYRIGHT AND LICENCE
+
+This software is copyright (c) 2012 by Toby Inkster.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head1 DISCLAIMER OF WARRANTIES
+
+THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+

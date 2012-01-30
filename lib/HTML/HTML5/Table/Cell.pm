@@ -62,7 +62,11 @@ sub calculate_celltext
 {
 	my ($self, $totext) = @_;
 	return $self if $self->celltext;
-	$self->celltext(join '', map { $totext->process($_) } $self->node->childNodes);
+	$self->celltext(
+		join '', map
+			{ $totext->process($_, 'no_clone') }
+			$self->node->childNodes
+		);
 	$self;
 }
 

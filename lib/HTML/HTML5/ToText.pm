@@ -16,6 +16,7 @@ has '+_trait_namespace' => (
 	default => join('::', __PACKAGE__, 'Trait'),
 	);
 
+use HTML::HTML5::Parser;
 use XML::LibXML::PrettyPrint;
 
 BEGIN
@@ -49,14 +50,15 @@ BEGIN
 
 sub process
 {
-	my ($self, $node) = @_;
+	my ($self, $node, $no_clone) = @_;
 	$self = $self->new unless ref $self;
 	
 	if ($node->nodeName eq '#document')
 	{
-		$node = $node->documentElement->cloneNode(1);
+		$node = $node->documentElement;
 	}
-	else
+	
+	unless ($no_clone)
 	{
 		$node = $node->cloneNode(1);
 	}
@@ -73,6 +75,14 @@ sub process
 	{
 		return $node->data;
 	}
+}
+
+sub process_string
+{
+	shift->process(
+		HTML::HTML5::Parser->load_html(string => shift, URI => shift),
+		'no_clone',
+		);
 }
 
 sub textnode
@@ -158,7 +168,86 @@ HTML::HTML5::ToText - convert HTML to plain text
 
 =head1 SYNOPSIS
 
+ my $dom = HTML::HTML5::Parser->load_html(IO => \*STDIN);
+ print HTML::HTML5::ToText
+     ->with_traits(qw/ShowLinks ShowImages RenderTables/)
+     ->new()
+     ->process($dom);
+
 =head1 DESCRIPTION
+
+The L<HTML::HTML5::ToText> module itself produces a pretty boring conversion
+of HTML to text, but thanks to L<Moose> and L<MooseX::Traits>.
+
+=head2 Compositor
+
+=over
+
+=item C<< with_traits(@traits) >>
+
+This class method creates a new class that composes C<HTML::HTML5::ToText>
+with each trait given, returning the name of that class. That class will
+be a subclass of C<HTML::HTML5::ToText>.
+
+Traits are taken to be in the "HTML::HTML5::ToText::Trait" namespace
+unless overridden by prefixing the trait with "+".
+
+=back
+
+=head2 Constructors
+
+=over
+
+=item * C<< new(%attrs) >>
+
+Creates a new instance of the class.
+
+=item * C<< new_with_traits(traits => \@traits, %attrs) >>
+
+Shortcut for:
+
+ HTML::HTML5::ToText->with_traits(@traits)->new(%attrs)
+
+=back
+
+=head2 Attributes
+
+As per usual for Moose classes, accessor methods are provided for each
+attribute, and attributes may be set in the constructor.
+
+C<HTML::HTML5::ToText> does not actually provide any attributes, but
+some traits may.
+
+=head2 Methods
+
+=over
+
+=item * C<< process($node) >>
+
+Processes an L<XML::LibXML::Node> and returns a string. May be called as a
+class or object method.
+
+Because C<process> likes to perform some alterations to the DOM tree, as a
+first stage it makes a clone of the DOM tree (so that it can leave the
+original intact). If you don't care about any changes to the tree, and want
+to save a bit of CPU, then you can suppress the cloning by passing a true
+value as a second argument to C<process>.
+
+ HTML::HTML5::ToText->process($node, 'no_clone')
+
+=item * C<< process_string($string) >>
+
+As per C<process>, but first parses the string with L<HTML::HTML5::Parser>.
+The second argument (for cloning) does not exist as cloning is not needed in
+this case.
+
+=back
+
+There are also methods named (in upper-case) after every element defined in
+HTML5: C<< STRONG($node) >>, C<< DL($node) >>, C<< IMG($node) >> and so on,
+which C<< process($node) >> delegates to; and a C<< textnode($node) >>
+method which is the equivalent for text nodes. These are the methods which
+traits tend to modify.
 
 =head1 BUGS
 
@@ -166,6 +255,14 @@ Please report any bugs to
 L<http://rt.cpan.org/Dist/Display.html?Queue=HTML-HTML5-ToText>.
 
 =head1 SEE ALSO
+
+L<HTML::HTML5::Parser>,
+L<HTML::HTML5::Table>.
+
+L<HTML::HTML5::ToText::Trait::RenderTables>,
+L<HTML::HTML5::ToText::Trait::ShowImages>,
+L<HTML::HTML5::ToText::Trait::ShowLinks>,
+L<HTML::HTML5::ToText::Trait::TextFormatting>.
 
 =head1 AUTHOR
 
@@ -177,7 +274,6 @@ This software is copyright (c) 2012 by Toby Inkster.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
-
 
 =head1 DISCLAIMER OF WARRANTIES
 
