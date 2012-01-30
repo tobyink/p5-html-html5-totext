@@ -58,7 +58,7 @@ sub process
 		$node = $node->cloneNode(1);
 	}
 	
-	XML::LibXML::PrettyPrint->strip_whitespace($node);
+	XML::LibXML::PrettyPrint->new_for_html->strip_whitespace($node);
 	
 	my $elem = uc $node->nodeName;
 	return $self->$elem($node);
@@ -120,6 +120,9 @@ sub _empty
 {
 	return '';
 }
+
+around BR => sub { "\n" };
+around HR => sub { "\n" . ("-" x 8) . "\n" };
 
 __PACKAGE__
 __END__
