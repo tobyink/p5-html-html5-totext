@@ -268,6 +268,11 @@ L<HTML::HTML5::ToText::Trait::TextFormatting>.
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
 
+=head1 THANKS
+
+Everyone behind Moose. No way I could have done all this in a few hours 
+without Moose's strange brand of meta-programming!
+
 =head1 COPYRIGHT AND LICENCE
 
 This software is copyright (c) 2012 by Toby Inkster.
