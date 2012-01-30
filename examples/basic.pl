@@ -10,5 +10,6 @@ print HTML::HTML5::ToText->with_traits(qw/TextFormatting ShowLinks/)->process( $
 __DATA__
 <!doctype html>
 <title>Foo</title>
-<p><b><a href="http://enwp.org/Earth">Hello world</a></b></p>
-<p><i>how are you?</i></p>
+<link rel=stylesheet href=style.css>
+<p><b>Hello <a href="http://enwp.org/Earth">world</a></b></p>
+<p><i>how are<br>you?</i></p>
