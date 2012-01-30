@@ -61,12 +61,18 @@ sub process
 		$node = $node->cloneNode(1);
 	}
 	
-	XML::LibXML::PrettyPrint->new_for_html->strip_whitespace($node);
-	
-	my $elem = uc $node->nodeName;
-	my $str  = $self->$elem($node);
-	$str =~ s{ (^\n+) | (\n+$) }{}gx;
-	"$str\n";
+	if ($node->isa('XML::LibXML::Element'))
+	{
+		XML::LibXML::PrettyPrint->new_for_html->strip_whitespace($node);
+		my $elem = uc $node->nodeName;
+		my $str  = $self->$elem($node);
+		$str =~ s{ (^\n+) | (\n+$) }{}gx;
+		return "$str\n";
+	}
+	elsif ($node->isa('XML::LibXML::Text'))
+	{
+		return $node->data;
+	}
 }
 
 sub textnode
