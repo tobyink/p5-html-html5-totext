@@ -249,6 +249,39 @@ which C<< process($node) >> delegates to; and a C<< textnode($node) >>
 method which is the equivalent for text nodes. These are the methods which
 traits tend to modify.
 
+=head1 EXTENDING
+
+L<MooseX::Traits> makes it pretty easy to cleanly extend this module. Say
+for example, we want to add the feature where the HTML C<< <del> >> element
+is output as the empty string. (The default behavious treats it rather like
+C<< <div> >>.)
+
+ {
+   package Local::SkipDEL;
+   use Moose::Role;
+   override DEL => sub { '' };
+ }
+ 
+ print HTML::HTML5::ToText
+   -> with_traits(qw/ShowLinks ShowImages +Local::SkipDEL/)
+   -> process_string($html);
+
+Or maybe we want to force C<< <big> >> elements into uppercase?
+
+ {
+   package Local::Embiggen;
+   use Moose::Role;
+   around BIG => sub
+   {
+     my ($orig, $self, $elem) = @_;
+     return uc $self->$orig($elem);
+   };
+ }
+ 
+ print HTML::HTML5::ToText
+   -> with_traits(qw/+Local::Embiggen/)
+   -> process_string($html);
+
 =head1 BUGS
 
 Please report any bugs to
