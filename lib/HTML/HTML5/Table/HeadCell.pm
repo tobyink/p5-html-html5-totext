@@ -12,4 +12,6 @@ BEGIN {
 use Moose;
 extends 'HTML::HTML5::Table::Cell';
 
+has '+default_alignment' => ( default   => 'center' );
+
 1;

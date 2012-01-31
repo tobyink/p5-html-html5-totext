@@ -51,6 +51,12 @@ has all_cols => (
 	default   => sub { [] },
 	);
 
+has default_alignment => (
+	is        => 'ro',
+	isa       => 'Str',
+	default   => 'left',
+	);
+
 sub colspan
 {
 	my ($self) = @_;
@@ -112,7 +118,7 @@ sub align
 	{
 		return lc $self->col->group->node->getAttribute('align');
 	}
-	return 'left';
+	return lc $self->default_alignment;
 }
 
 1;

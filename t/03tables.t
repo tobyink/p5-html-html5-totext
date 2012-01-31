@@ -16,14 +16,14 @@ the bar to the foo to the bar to the
 foo to the bar to the foo to the bar
 to the foo to the bar to the foo.
 =======================================
- A       | B        | C        | D    
+    A    |    B     |    C     |   D  
 =======================================
- 1       | Big                 | i    
+    1    | Big                 | i    
          | monkey-ass cell!!!  |      
          | 1                   |      
          | 2                   |      
 ---------| 3                   |-------
- 2       | 4                   | ii   
+    2    | 4                   | ii   
          | 5                   |      
          | 6                   |      
          |                     |      
