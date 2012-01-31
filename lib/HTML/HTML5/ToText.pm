@@ -301,6 +301,50 @@ L<HTML::HTML5::ToText::Trait::ShowImages>,
 L<HTML::HTML5::ToText::Trait::ShowLinks>,
 L<HTML::HTML5::ToText::Trait::TextFormatting>.
 
+=head2 Similar Modules on CPAN
+
+=over
+
+=item * L<HTML::FormatText>
+
+About 15 years old, and still maintained, this falls into the "mature"
+category. This module is based on L<HTML::Tree>, so its HTML parser may
+not behave as closely to modern browsers as HTML::HTML5::Parser's parsing,
+but its conversion to text seems somewhat better than HTML::HTML5::ToText's
+default output (i.e. with no traits applied).
+
+At the time of writing, its bug queue on rt.cpan.org lists eight bugs, some
+quite serious. However, since being taken over by its latest maintainer,
+there seems to be progress being made on them.
+
+Fairly extensible, but not in the mix-and-match traits way allowed by 
+HTML::HTML5::ToText.
+
+=item * L<HTML::FormatText::WithLinks>
+
+An extension of HTML::FormatText.
+
+=item * L<HTML::FormatText::WithLinks::AndTables>
+
+An extension of HTML::FormatText::WithLinks.
+
+The code that deals with tables is pretty crude compared with
+HTML::HTML5::ToText::Trait::RenderTables. It doesn't support C<colspan>,
+C<rowspan>, or the C<< <th> >> element. But on the other hand, it does
+support C<align>...
+L<swings and roundabouts|http://en.wiktionary.org/wiki/swings_and_roundabouts>.
+
+=item * L<LEOCHARRE::HTML::Text>
+
+Very basic conversion; basically just tag stripping using regular expressions.
+
+=item * L<HTML::FormatExternal>
+
+Passes HTML through external command-line tools such as `lynx`. Obviously
+this has limited portability.
+
+=back
+
 =head1 AUTHOR
 
 Toby Inkster E<lt>tobyink@cpan.orgE<gt>.
