@@ -11,7 +11,7 @@ BEGIN {
 
 use List::Util qw/max/;
 use Moose;
-use POSIX qw/ceil/;
+use POSIX qw/ceil floor/;
 
 has node => (
 	is        => 'rw',
@@ -84,11 +84,18 @@ sub to_text
 		}
 		$n -= 3;
 		
+		my $align = $cell->align;
 		my $format = sub
 		{
 			my ($str) = @_;
 			return (' ' x $n) unless defined $str;
-			sprintf($cell->align =~ /right/i ? "% ${n}s" : "% -${n}s", $str);
+			if ($align =~ /middle|center|centre/i)
+			{
+				my $before = floor(($n - length $str) / 2);
+				my $after  = $n - ($before + length $str);
+				return (' ' x $before).$str.(' ' x $after);
+			}
+			sprintf($align =~ /right/i ? "% ${n}s" : "% -${n}s", $str);
 		};
 
 		my @celltext  = split /\r?\n/, $cell->celltext;

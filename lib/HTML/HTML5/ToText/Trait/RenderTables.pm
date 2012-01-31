@@ -75,8 +75,9 @@ rendering, or whether to use the default table rendering.
 The table rendering engine understands the C<< <caption> >>, C<< <thead> >>,
 C<< <tbody> >>, C<< <tfoot> >>, C<< <tr> >>, C<< <th> >>, C<< <td> >>,
 C<< <colgroup> >> and C<< <col> >> elements; and the C<< span >>,
-C<< colspan >> and C<< rowspan >> attributes. It doesn't currently do
-C<< align >> / C<< valign >>, but one day...
+C<< align >> (values "left", "right" and "center"), C<< colspan >> and
+C<< rowspan >> attributes. It doesn't currently do C<< valign >>, but maybe
+one day...
 
 =head1 BUGS
 
