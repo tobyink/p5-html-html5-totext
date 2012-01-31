@@ -6,7 +6,7 @@ use utf8;
 
 BEGIN {
 	$HTML::HTML5::ToText::Trait::TextFormatting::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::HTML5::ToText::Trait::TextFormatting::VERSION   = '0.001';
+	$HTML::HTML5::ToText::Trait::TextFormatting::VERSION   = '0.002';
 }
 
 use Moose::Role;

@@ -6,7 +6,7 @@ use utf8;
 
 BEGIN {
 	$HTML::HTML5::ToText::Trait::ShowLinks::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::HTML5::ToText::Trait::ShowLinks::VERSION   = '0.001';
+	$HTML::HTML5::ToText::Trait::ShowLinks::VERSION   = '0.002';
 }
 
 use Moose::Role;

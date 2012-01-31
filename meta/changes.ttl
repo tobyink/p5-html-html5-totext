@@ -15,3 +15,16 @@ dist:v_0-001
 	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-HTML5-ToText-0.001.tar.gz> ;
 	rdfs:label      "Initial release" .
 
+dist:project :release dist:v_0-002 .
+dist:v_0-002
+	a               :Version ;
+	dc:issued       "2012-01-31"^^xsd:date ;
+	:revision       "0.002"^^xsd:string ;
+	:file-release   <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/HTML-HTML5-ToText-0.002.tar.gz> ;
+	dcs:changeset [
+		dcs:versus dist:v_0-001 ;
+		dcs:item   [ rdfs:label "Include examples of how to extend HTML::HTML5::ToText using traits."@en; a dcs:Documentation ];
+		dcs:item   [ rdfs:label "Support align attribute on table cells, columns and colgroups. Values 'justify' and 'char' are not supported."@en; a dcs:Addition ];
+		dcs:item   [ rdfs:label "Table header cells <th> default to centre alignment."@en ];
+		] .
+
