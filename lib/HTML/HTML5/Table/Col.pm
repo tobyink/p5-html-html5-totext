@@ -4,6 +4,11 @@ use 5.010;
 use namespace::autoclean;
 use utf8;
 
+BEGIN {
+	$HTML::HTML5::Table::Col::AUTHORITY = 'cpan:TOBYINK';
+	$HTML::HTML5::Table::Col::VERSION   = '0.001';
+}
+
 use List::Util qw/max/;
 use Moose;
 use POSIX qw/ceil/;

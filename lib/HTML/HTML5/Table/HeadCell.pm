@@ -4,6 +4,11 @@ use 5.010;
 use namespace::autoclean;
 use utf8;
 
+BEGIN {
+	$HTML::HTML5::Table::HeadCell::AUTHORITY = 'cpan:TOBYINK';
+	$HTML::HTML5::Table::HeadCell::VERSION   = '0.001';
+}
+
 use Moose;
 extends 'HTML::HTML5::Table::Cell';
 
