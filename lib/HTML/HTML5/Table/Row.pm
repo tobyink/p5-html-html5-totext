@@ -83,6 +83,13 @@ sub to_text
 			$n += $c->width + 3;
 		}
 		$n -= 3;
+		
+		my $format = sub
+		{
+			my ($str) = @_;
+			return (' ' x $n) unless defined $str;
+			sprintf($cell->align =~ /right/i ? "% ${n}s" : "% -${n}s", $str);
+		};
 
 		my @celltext  = split /\r?\n/, $cell->celltext;
 		my $skiplines = 0;
@@ -94,17 +101,14 @@ sub to_text
 		
 		for my $i (0 .. $#lines)
 		{
-			my $ct = defined $celltext[$i + $skiplines]
-				? sprintf("% -${n}s", $celltext[$i + $skiplines])
-				: (' ' x $n);
-			$lines[$i] .= $ct;
+			$lines[$i] .= $format->( $celltext[$i + $skiplines] );
 			$lines[$i] .= ' | ' unless $lastcell;
 		}
 		
 		if (defined (my $final = $celltext[ $skiplines + scalar(@lines) ]))
 		{
 			$trailer =~ s/\+\-$/| /;
-			$trailer .= sprintf("% -${n}s", $final);
+			$trailer .= $format->($final);
 			$trailer .= $lastcell ? ' ' : ' |-';
 		}
 		else

@@ -330,9 +330,7 @@ An extension of HTML::FormatText::WithLinks.
 
 The code that deals with tables is pretty crude compared with
 HTML::HTML5::ToText::Trait::RenderTables. It doesn't support C<colspan>,
-C<rowspan>, or the C<< <th> >> element. But on the other hand, it does
-support C<align>...
-L<swings and roundabouts|http://en.wiktionary.org/wiki/swings_and_roundabouts>.
+C<rowspan>, or the C<< <th> >> element. 
 
 =item * L<LEOCHARRE::HTML::Text>
 

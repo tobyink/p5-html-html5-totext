@@ -91,4 +91,28 @@ sub needs_height
 	return ceil((scalar(@lines) + 1) / $self->rowspan) - 1;
 }
 
+sub align
+{
+	my ($self) = @_;
+	if ($self->node
+	and $self->node->hasAttribute('align'))
+	{
+		return lc $self->node->getAttribute('align');
+	}
+	if ($self->col
+	and $self->col->node
+	and $self->col->node->hasAttribute('align'))
+	{
+		return lc $self->col->node->getAttribute('align');
+	}
+	if ($self->col
+	and $self->col->group
+	and $self->col->group->node
+	and $self->col->group->node->hasAttribute('align'))
+	{
+		return lc $self->col->group->node->getAttribute('align');
+	}
+	return 'left';
+}
+
 1;

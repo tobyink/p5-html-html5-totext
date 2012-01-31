@@ -17,7 +17,7 @@ __DATA__
 <table>
 	<caption>Foo to the bar to the foo to the bar to the foo to the bar to the
 	foo to the bar to the foo to the bar to the foo to the bar to the foo.</caption>
-	<col>
+	<col align="center">
 	<colgroup>
 		<col span="2">
 	</colgroup>
@@ -32,7 +32,7 @@ __DATA__
 	<tbody>
 		<tr>
 			<th>1</th>
-			<td colspan="2" rowspan="2">Big<br>monkey-ass cell!!!<br>1<br>2<br>3<br>4<br>5<br>6</td>
+			<td align="right" colspan="2" rowspan="2">Big<br>monkey-ass cell!!!<br>1<br>2<br>3<br>4<br>5<br>6</td>
 			<td>i</td>
 		</tr>
 		<tr>
