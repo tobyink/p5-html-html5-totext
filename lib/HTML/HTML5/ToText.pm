@@ -177,7 +177,8 @@ HTML::HTML5::ToText - convert HTML to plain text
 =head1 DESCRIPTION
 
 The L<HTML::HTML5::ToText> module itself produces a pretty boring conversion
-of HTML to text, but thanks to L<Moose> and L<MooseX::Traits>.
+of HTML to text, but thanks to L<Moose> and L<MooseX::Traits> it can easily
+be composed with "traits" that improve the output.
 
 =head2 Compositor
 
