@@ -14,7 +14,7 @@
 	:homepage       <https://metacpan.org/release/HTML-HTML5-ToText> ;
 	:download-page  <https://metacpan.org/release/HTML-HTML5-ToText> ;
 	:bug-database   <http://rt.cpan.org/Dist/Display.html?Queue=HTML-HTML5-ToText> ;
-	:repository     [ a :HgRepository ; :browse <https://bitbucket.org/tobyink/p5-html-html5-totext> ] ;
+	:repository     [ a :GitRepository ; :browse <https://github.com/tobyink/p5-html-html5-totext> ] ;
 	:created        "2012-01-30"^^xsd:date ;
 	:license        <http://dev.perl.org/licenses/> ;
 	:developer      [ a foaf:Person ; foaf:name "Toby Inkster" ; foaf:mbox <mailto:tobyink@cpan.org> ] .
