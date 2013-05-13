@@ -6,7 +6,7 @@ use utf8;
 
 BEGIN {
 	$HTML::HTML5::Table::ColGroup::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::HTML5::Table::ColGroup::VERSION   = '0.002';
+	$HTML::HTML5::Table::ColGroup::VERSION   = '0.003';
 }
 
 use Moose;
