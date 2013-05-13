@@ -14,7 +14,7 @@ with 'MooseX::Traits';
 
 has '+_trait_namespace' => (
 	default => join('::', __PACKAGE__, 'Trait'),
-	);
+);
 
 use HTML::HTML5::Parser;
 use XML::LibXML::PrettyPrint;
@@ -82,7 +82,7 @@ sub process_string
 	shift->process(
 		HTML::HTML5::Parser->load_html(string => shift, URI => shift),
 		'no_clone',
-		);
+	);
 }
 
 sub textnode
@@ -102,7 +102,7 @@ sub _inline
 		{
 			$return .= $self->textnode($kid, %args);
 		}
-		else
+		elsif ($kid->isa('XML::LibXML::Element'))
 		{
 			my $elem = uc $kid->nodeName;
 			$return .= $self->$elem($kid, %args);
@@ -123,7 +123,7 @@ sub _block
 		{
 			$return .= $self->textnode($kid, %args);
 		}
-		else
+		elsif ($kid->isa('XML::LibXML::Element'))
 		{
 			my $elem = uc $kid->nodeName;
 			my $str  = $self->$elem($kid, %args);
@@ -132,12 +132,12 @@ sub _block
 			{
 				$str =~ s{^\n}{};
 			}
-
+			
 			if ($str =~ m{\n$} and not $kid->nextSibling)
 			{
 				$str =~ s{\n$}{};
 			}
-
+			
 			$return .= $str;
 		}
 	}

@@ -8,6 +8,7 @@ is $str, <<'OUTPUT';
 Foo
 LINK: <style.css> (stylesheet)
 
+
 *Hello world <http://enwp.org/Earth>*
 
 _how_are
@@ -18,5 +19,6 @@ __DATA__
 <!doctype html>
 <title>Foo</title>
 <link rel=stylesheet href=style.css>
+<!-- comment -->
 <p><b>Hello <a href="http://enwp.org/Earth">world</a></b></p>
 <p><i>how are<br><img src=you.jpeg alt=you>?</i></p>
