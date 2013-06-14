@@ -6,7 +6,7 @@ use utf8;
 
 BEGIN {
 	$HTML::HTML5::Table::Section::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::HTML5::Table::Section::VERSION   = '0.003';
+	$HTML::HTML5::Table::Section::VERSION   = '0.004';
 }
 
 use Moose;
@@ -61,7 +61,7 @@ sub parse
 
 		foreach my $td ($tr->childNodes)
 		{
-			next unless $td->localname ~~ [qw/td th/];
+			next if $td->localname !~ /^t[dh]$/;
 			
 			while ($row->cells->[ $pos_col ]) # skip already occupied cells
 			{

@@ -6,7 +6,7 @@ use utf8;
 
 BEGIN {
 	$HTML::HTML5::ToText::AUTHORITY = 'cpan:TOBYINK';
-	$HTML::HTML5::ToText::VERSION   = '0.003';
+	$HTML::HTML5::ToText::VERSION   = '0.004';
 }
 
 use Moose;
@@ -71,7 +71,7 @@ sub process
 		$str =~ s{ (^\n+) | (\n+$) }{}gx;
 		return "$str\n";
 	}
-	elsif ($node->isa('XML::LibXML::Text'))
+	elsif ($node->nodeName eq '#text')
 	{
 		return $node->data;
 	}
