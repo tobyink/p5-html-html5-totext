@@ -61,7 +61,7 @@ after push_cell => sub
 sub _build_height
 {
 	my ($self) = @_;
-	max(map { $_->needs_height } @{ $self->cells });
+	max(0, map { $_->needs_height } @{ $self->cells });
 }
 
 sub to_text

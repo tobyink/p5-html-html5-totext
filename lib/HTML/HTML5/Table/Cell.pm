@@ -84,7 +84,7 @@ sub calculate_celltext
 sub needs_width
 {
 	my ($self) = @_;
-	my $max_line = max(map { length $_ } split /\r?\n/, $self->celltext);
+	my $max_line = max(0, map { length $_ } split /\r?\n/, $self->celltext);
 	return $max_line if $self->colspan == 1;
 	return ceil($max_line / $self->colspan) - 1;
 }
