@@ -35,6 +35,9 @@ to the foo to the bar to the foo.
 =======================================
 
 And here's some other stuff.
+=================
+ Some content | 
+=================
 OUTPUT
 
 __DATA__
@@ -76,3 +79,6 @@ __DATA__
 	</tbody>
 </table>
 <p>And here's some other stuff.</p>
+<table>
+<tr><td>Some content</td><td></td></tr>
+</table>
