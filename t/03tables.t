@@ -38,6 +38,8 @@ And here's some other stuff.
 =================
  Some content | 
 =================
+
+And an empty table
 OUTPUT
 
 __DATA__
@@ -82,3 +84,5 @@ __DATA__
 <table>
 <tr><td>Some content</td><td></td></tr>
 </table>
+<p>And an empty table</p>
+<table><tr></tr></table>
